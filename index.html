@@ -1,160 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Invitation</title>
+  <title>Navigation Bar</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .navbar a {
+      color: white;
       text-align: center;
-      background-image: url('img1.jpg'); /* Replace 'your_image.jpg' with the path to your desired background image */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      padding: 14px 20px;
+      text-decoration: none;
+      margin: 0 10px;
     }
 
-    #invitation {
-      margin-top: 50px;
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
     }
 
-    .gif-container {
-      margin-bottom: 20px;
+    .centered-div {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
     }
 
-    .gif-container iframe {
-      width: 500px; /* Set the width of the iframe */
-      height: 416.667px; /* Set the height of the iframe */
+    .no-button {
+      transition: transform 0.3s;
     }
 
-    .text-links {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 18px;
-      color: rgb(0, 0, 0);
-      z-index: 2;
-      font-family: cursive; /* Change font to Arial */
-    }
-
-    .text-links p {
-      margin: 0; /* Remove default margin */
-    }
-
-    #invitation h2 {
-      margin-bottom: 20px;
-    }
-
-    #invitation button {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    #messageInputContainer {
-      display: none;
-      margin-top: 20px;
-    }
-
-    #messageInput {
-      width: 80%;
-      max-width: 400px;
+    .no-button:hover {
+      transform: translate(calc((Math.random() - 0.5) * 100px), calc((Math.random() - 0.5) * 100px));
     }
   </style>
 </head>
-
 <body>
+  
+<div class="navbar" id="myNavbar">
+  <a href="">*Click to visit these links :-</a>
+  <a href="https://photos.app.goo.gl/mbcrSeNeJY7uQFsr8">Personalized Moon/Skies Images</a>
+  <a href="https://music.youtube.com/playlist?list=PLVP-214aYP8LaYTaXfeiHm1kusmDlkJhC">YT Music Playlist </a>
+  <a href="https://www.instagram.com/">Watch my reels that you ignoring</a>
+</div>
 
-  <div id="invitation">
-    <div id="defaultGif" class="gif-container">
-      <div class="gif-wrapper">
-        <iframe src="giphy (1).gif" frameborder="0" allowfullscreen width="500" height="375.667"></iframe>
-      </div>
-    </div>
-    <h2>Diksha are you free on sunday?</h2>
-    <h3>we can go to eat momos.</h3>
-    <div id="afterGif" class="gif-container" style="display: none;">
-      <div class="gif-wrapper">
-        <!-- Replaced iframe source URL here -->
-        <iframe src="giphy.gif" frameborder="0" allowfullscreen width="500" height="416.667"></iframe>
-      </div>
-    </div>
-    <button id="yesButton" onclick="reply('yes')">Yes</button>
-    <button id="noButton" onmouseover="changeButtonPosition()">No</button>
-    <div id="messageInputContainer">
-      <textarea id="messageInput" placeholder="Write your message..."></textarea>
-      <button id="submitButton">Submit</button>
-    </div>
-    <div class="text-links">
-      <p>If you're bored, visit these</a></p>
-      <p><a href="https://photos.app.goo.gl/mbcrSeNeJY7uQFsr8">Mooooon images for you </a></p>
-      <p><a href="https://music.youtube.com/playlist?list=PLVP-214aYP8LaYTaXfeiHm1kusmDlkJhC">YT music playlist for your Pachmarchi tour</a></p>
-    </div>
+<div class="centered-div" id="centeredDiv">
+  <img id="gifImage" src="gif3.gif" alt="GIF" width="500" height="416">
+  <div id="customMessage" style="display: none;">
+    <textarea id="messageTextarea" rows="4" cols="50" placeholder="write message you've got a immidiate confirmation on whatsapp"></textarea><br>
+    <button id="submitButton" onclick="submitMessage()">Submit</button>
   </div>
+ 
+  <div>
+    <button id="noButton" class="no-button" onmouseover="changeButtonPosition()" onmouseleave="resetButtonPosition()" onclick="pasteCode('no')">No</button>
+    <button onclick="pasteCode('yes')">Yes</button>
+  </div>
+  <h2>Diksha kal momos khane chalein ?</h2>
+</div>
+<audio id="audio" src="Friends-Theme.mp3"></audio>
 
-  <audio id="audio" src="Friends-Theme.mp3"></audio>
+<script>
+function changeButtonPosition() {
+  var noButton = document.getElementById('noButton');
+  noButton.style.position = 'relative';
+  var left = Math.floor(Math.random() * 400) - 200; // Random left position between -200px and 200px
+  var top = Math.floor(Math.random() * 400) - 200; // Random top position between -200px and 200px
+  noButton.style.left = left + 'px';
+  noButton.style.top = top + 'px';
+}
 
-  <script>
-    var audio = document.getElementById('audio');
+function resetButtonPosition() {
+  var noButton = document.getElementById('noButton');
+  noButton.style.position = 'static'; // Reset position to default
+}
 
-    function reply(response) {
-      if (response === 'yes') {
-        alert("Great! We're glad you can make it.");
-        document.getElementById('defaultGif').style.display = 'none';
-        document.getElementById('afterGif').style.display = 'block';
-        document.getElementById('messageInputContainer').style.display = 'block';
-        audio.play(); // Play the audio
-      } else {
-        alert("That's too bad. Maybe next time!");
-      }
-    }
+function pasteCode(choice) {
+  if (choice === 'yes') {
+    // Change the GIF image when Yes button is clicked
+    document.getElementById('gifImage').src = 'giphy.gif';
+    audio.play();
+    alert("You clicked Yes!");
+    document.getElementById('customMessage').style.display = 'block';
+  } else {
+    // Adjust the position of the "No" button randomly
+    changeButtonPosition();
+  }
+}
 
-    function changeButtonPosition() {
-      var noButton = document.getElementById('noButton');
-      noButton.style.position = 'relative';
-      var left = Math.floor(Math.random() * 400) - 200; // Random left position between -200px and 200px
-      var top = Math.floor(Math.random() * 400) - 200; // Random top position between -200px and 200px
-      noButton.style.left = left + 'px';
-      noButton.style.top = top + 'px';
-    }
-  </script>
-    </script>
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-      import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyDDTSNZfr8hdqCF49MBkCwa07QG0yAlmwU",
-        authDomain: "testing-4f1d1.firebaseapp.com",
-        databaseURL: "https://testing-4f1d1-default-rtdb.firebaseio.com",
-        projectId: "testing-4f1d1",
-        storageBucket: "testing-4f1d1.appspot.com",
-        messagingSenderId: "409754138686",
-        appId: "1:409754138686:web:3c3106b360eec8209af96f"
-      };
-  
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-  
-      document.getElementById("submitButton").addEventListener('click', function (e) {
-        e.preventDefault();
-        set(ref(db, 'message/' + document.getElementById("messageInput").value),
-          {
-            messageInput: document.getElementById("messageInput").value,
-          })
-        alert("login successful")
+function submitMessage() {
+  var message = document.getElementById('messageTextarea').value;
+  // Save the message to Firebase
+  set(ref(db, 'message/' + message), {
+    messageInput: message
+  }).then(function() {
+    alert("Message submitted successfully!");
+  }).catch(function(error) {
+    console.error("Error adding message: ", error);
+  });
+}
+
+</script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDDTSNZfr8hdqCF49MBkCwa07QG0yAlmwU",
+    authDomain: "testing-4f1d1.firebaseapp.com",
+    databaseURL: "https://testing-4f1d1-default-rtdb.firebaseio.com",
+    projectId: "testing-4f1d1",
+    storageBucket: "testing-4f1d1.appspot.com",
+    messagingSenderId: "409754138686",
+    appId: "1:409754138686:web:3c3106b360eec8209af96f"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  document.getElementById("submitButton").addEventListener('click', function (e) {
+    e.preventDefault();
+    set(ref(db, 'message/' + document.getElementById("messageTextarea").value),
+      {
+        messageInput: document.getElementById("messageTextarea").value,
       })
-  
-  
-    </script>
-  
+    alert("login successful")
+  })
+</script>
 
 </body>
-
 </html>
